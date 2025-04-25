@@ -1,2 +1,2 @@
 # Hackathon
-UW Save the World Hackathon
+UWBee Save the World Hackathon
