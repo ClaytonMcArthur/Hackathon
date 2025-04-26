@@ -37,26 +37,42 @@ body {
   background: white;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   flex: 1;
   min-width: 300px;
   max-width: 360px;
 }
 
-#shop-items button {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  background-color: #ffd966;
-  cursor: pointer;
-  transition: background-color 0.3s;
+#shop-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+  max-height: 250x;
+  overflow-y: auto;
 }
 
-#shop-items button:hover {
-  background-color: #ffcf33;
+/* Seed shop */
+.seed-packet {
+  width: 40px;
+  height: 40px;
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: contain;
+  margin: 5px;
+  cursor: grab;
+  transition: transform 0.2s;
+}
+
+.seed-packet:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+#garden-area.drag-over {
+  background-color: #eaffea;
+  border-color: #66cc66;
 }
 
 #garden-area {
@@ -85,9 +101,19 @@ body {
 }
 
 @keyframes flyBee {
-  0% { opacity: 0; transform: translateY(0); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-120px) rotate(360deg); }
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) rotate(360deg);
+  }
 }
 
 .garden-footer {
@@ -115,7 +141,7 @@ body {
   background: white;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.15);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
   text-align: center;
   margin: 30px auto;
   max-width: 600px;

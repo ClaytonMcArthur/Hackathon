@@ -14,6 +14,16 @@ const flowers = [
   { name: 'Snapdragon', price: 30, bees: 15, image: '../Game/sprites/Snapdragon.png' }
 ];
 
+// Seed packets
+const seeds = [
+  { name: 'SeedsGoldenrod', flower: 'Goldenrod', image: '../Game/sprites/SeedsGoldenrod.png' },
+  { name: 'SeedsBorage', flower: 'Borage', image: '../Game/sprites/SeedsBorage.png' },
+  { name: 'SeedsSunflower', flower: 'Sunflower', image: '../Game/sprites/SeedsSunflower.png' },
+  { name: 'SeedsBeebalm', flower: 'Beebalm', image: '../Game/sprites/SeedsBeebalm.png' },
+  { name: 'SeedsHyacinth', flower: 'Hyacinth', image: '../Game/sprites/SeedsHyacinth.png' },
+  { name: 'SeedsSnapdragon', flower: 'Snapdragon', image: '../Game/sprites/SeedsSnapdragon.png' }
+]
+
 // DOM Elements
 const moneySpan = document.getElementById('money');
 const daySpan = document.getElementById('day');
@@ -38,24 +48,49 @@ gardenArea.innerHTML = `
 
 const plantImg = document.getElementById('current-plant');
 
-// Initialize shop
-flowers.forEach(flower => {
-  const btn = document.createElement('button');
-  btn.textContent = `${flower.name} ($${flower.price})`;
-  btn.onclick = () => buyFlower(flower);
-  shopItemsDiv.appendChild(btn);
-});
-
 // Buy flower
 function buyFlower(flower) {
   if (money >= flower.price) {
     money -= flower.price;
     garden = [flower];
+    plantImg.src = flower.image;
     updateUI();
   } else {
     alert('Not enough money!');
   }
 }
+
+// Buding seeds
+seeds.forEach(seed => {
+  const seedImg = document.createElement('img');
+  seedImg.src = seed.image;
+  seedImg.alt = seed.name;
+  seedImg.classList.add('seed-packet');
+  seedImg.setAttribute('draggable', true);
+  shopItemsDiv.appendChild(seedImg);
+
+  seedImg.addEventListener('dragstart', function (e) {
+    e.dataTransfer.setData('text/plain', seed.flower);
+  });
+});
+
+gardenArea.addEventListener('dragover', function (e) {
+  e.preventDefault();
+  gardenArea.classList.add('drag-over');
+});
+gardenArea.addEventListener('dragleave', function (e) {
+  gardenArea.classList.remove('drag-over');
+});
+gardenArea.addEventListener('drop', function (e) {
+  e.preventDefault();
+  gardenArea.classList.remove('drag-over');
+
+  const flowerName = e.dataTransfer.getData('text/plain');
+  const flower = flowers.find(f => f.name === flowerName);
+  if (flower) {
+    buyFlower(flower);
+  }
+});
 
 // End Day logic
 endDayButton.onclick = () => {
