@@ -1,6 +1,7 @@
 // Game State
 let money = 100;
 let day = 1;
+let numPots = 1;
 const maxDays = 10;
 let garden = [];
 
@@ -14,8 +15,6 @@ const flowers = [
   { name: 'Snapdragon', price: 30, bees: 15, image: '../Game/sprites/Snapdragon.png' }
 ];
 
-const pot = { name: 'EmptyPot', price: 5, image: '../Game/sprites/LiterallyJustAPot.png' };
-
 // Seed packets
 const seeds = [
   { name: 'SeedsGoldenrod', flower: 'Goldenrod', image: '../Game/sprites/SeedsGoldenrod.png' },
@@ -25,6 +24,8 @@ const seeds = [
   { name: 'SeedsHyacinth', flower: 'Hyacinth', image: '../Game/sprites/SeedsHyacinth.png' },
   { name: 'SeedsSnapdragon', flower: 'Snapdragon', image: '../Game/sprites/SeedsSnapdragon.png' }
 ]
+
+const pot = { name: 'EmptyPot', price: 5, image: '../Game/sprites/LiterallyJustAPot.png' };
 
 // DOM Elements
 const moneySpan = document.getElementById('money');
@@ -45,7 +46,7 @@ const restartButton = document.getElementById('restart-button');
 // Create plant display area
 gardenArea.innerHTML = `
   <div id="plant-display">
-    <img id="current-plant" src="../Game/sprites/LiterallyJustAPot.png" alt="Plant Pot" style="width: 200px; height: auto; image-rendering: pixelated;">
+    <img id="current-plant" src="../Game/sprites/LiterallyJustAPot.png" alt="Plant Pot" style="width: 100px; height: auto; image-rendering: pixelated;">
   </div>
 `;
 
@@ -68,7 +69,8 @@ function buyPot(pot) {
   if (money >= pot.price) {
     money -= pot.price;
     potImg.src = pot.image;
-    updateUI;
+    updateUI();
+    numPots++;
   } else {
     alert('Not enough money!');
   }
@@ -125,14 +127,12 @@ gardenArea.addEventListener('drop', function (e) {
   e.preventDefault();
   gardenArea.classList.remove('drag-over');
 
-  const itemName = e.dataTransfer.getData('text/plain');
-  if (itemName == 'EmptyPot') {
-    buyPot(pot);
+  const flowerName = e.dataTransfer.getData('text/plain');
+  const flower = flowers.find(f => f.name === flowerName);
+  if (flower) {
+    buyFlower(flower);
   } else {
-    const flower = flowers.find(f => f.name === flowerName);
-    if (flower) {
-      buyFlower(flower);
-    }
+    buyPot(pot);
   }
 });
 
@@ -158,9 +158,9 @@ function updateUI() {
   moneySpan.textContent = `Money: $${money}`;
   daySpan.textContent = `Day: ${day}/${maxDays}`;
 
-  if (garden.length > 0) {
-    plantImg.src = garden[0].image;
-    plantImg.alt = garden[0].name;
+  if (garden.length >= numPots) {
+    plantImg.src = garden[numPots - 1].image;
+    plantImg.alt = garden[numPots - 1].name;
   } else {
     plantImg.src = pot.image;
     plantImg.alt = pot.name;
