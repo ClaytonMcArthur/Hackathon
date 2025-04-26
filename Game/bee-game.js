@@ -42,6 +42,7 @@ const scoreFlowers = document.getElementById('score-flowers');
 const scoreStars = document.getElementById('score-stars');
 const scoreBest = document.getElementById('score-best');
 const restartButton = document.getElementById('restart-button');
+const startButton = document.getElementById('start-button');
 
 // Create plant display area
 gardenArea.innerHTML = `
@@ -243,6 +244,13 @@ function saveBestBees(bees) {
 
 function getBestBees() {
   return parseInt(localStorage.getItem('bestBees') || '0');
+}
+
+// Start game
+startButton.onclick = () => {
+  startButton.style.display = 'none';
+  document.getElementById('bee-garden-game').style.disply = 'block';
+  resetGame();
 }
 
 // Restart game
