@@ -1,56 +1,72 @@
+/* Bee Garden Game Styles */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #eaffea;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  font-family: 'Quicksand', sans-serif;
 }
 
-header {
-  background: #fff8c0;
-  padding: 10px;
+#bee-garden-game {
+  background: #f7fef7;
+  padding: 30px;
+  margin: 30px auto;
+  border-radius: 20px;
+  max-width: 800px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.garden-header {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-#stats {
-  margin-top: 10px;
+.garden-header h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
-main {
-  flex: 1;
+#garden-stats {
+  font-weight: 600;
+}
+
+.garden-layout {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
   gap: 20px;
+  justify-content: center;
 }
 
-section {
+.garden-panel {
   background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  width: 300px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+  flex: 1;
+  min-width: 300px;
+  max-width: 360px;
 }
 
 #shop-items button {
-  display: block;
-  margin-bottom: 10px;
   width: 100%;
-  padding: 10px;
+  margin-bottom: 10px;
+  padding: 12px;
   font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ffd966;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#shop-items button:hover {
+  background-color: #ffcf33;
 }
 
 #garden-area {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
   min-height: 200px;
-  border: 2px dashed #ccc;
+  border: 2px dashed #a2dca2;
+  border-radius: 10px;
   padding: 10px;
 }
 
@@ -65,30 +81,85 @@ section {
   width: 30px;
   height: 30px;
   pointer-events: none;
-  animation: flyBee 2s linear forwards;
+  animation: flyBee 2s ease-in forwards;
 }
 
 @keyframes flyBee {
   0% { opacity: 0; transform: translateY(0); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-100px); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-120px) rotate(360deg); }
 }
 
-footer {
+.garden-footer {
   text-align: center;
-  padding: 10px;
-  background: #ffd;
+  margin-top: 20px;
 }
 
 #end-day-button {
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 18px;
-  background: #ffcf33;
+  background: #7bd67b;
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 15px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 #end-day-button:hover {
-  background: #ffd966;
+  background: #5cb85c;
+}
+
+/* Scoreboard Styles */
+#scoreboard {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.15);
+  text-align: center;
+  margin: 30px auto;
+  max-width: 600px;
+}
+
+#scoreboard h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#scoreboard p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+#score-stars {
+  font-size: 24px;
+  color: gold;
+  margin: 15px 0;
+}
+
+#score-best {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+#restart-button {
+  padding: 12px 25px;
+  font-size: 18px;
+  background: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#restart-button:hover {
+  background: #4cae4c;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .garden-layout {
+    flex-direction: column;
+  }
 }
