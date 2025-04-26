@@ -6,12 +6,12 @@ let garden = [];
 
 // Flowers for sale
 const flowers = [
-  { name: 'Goldenrod', price: 10, bees: 5, image: '..Game/sprites/Goldenrod.png' },
-  { name: 'Borage', price: 20, bees: 10, image: '..Game/sprites/Borage.png' },
-  { name: 'Sunflower', price: 30, bees: 15, image: '..Game/sprites/Sunflower.png' },
-  { name: 'Beebalm', price: 30, bees: 15, image: '..Game/sprites/Beebalm.png' },
-  { name: 'Hyacinth', price: 30, bees: 15, image: '..Game/sprites/Hyacinth.png' },
-  { name: 'Snapdragon', price: 30, bees: 15, image: '..Game/sprites/Snapdragon.png' }
+  { name: 'Goldenrod', price: 10, bees: 5, image: '../Game/sprites/Goldenrod.png' },
+  { name: 'Borage', price: 20, bees: 10, image: '../Game/sprites/Borage.png' },
+  { name: 'Sunflower', price: 30, bees: 15, image: '../Game/sprites/Sunflower.png' },
+  { name: 'Beebalm', price: 30, bees: 15, image: '../Game/sprites/Beebalm.png' },
+  { name: 'Hyacinth', price: 30, bees: 15, image: '../Game/sprites/Hyacinth.png' },
+  { name: 'Snapdragon', price: 30, bees: 15, image: '../Game/sprites/Snapdragon.png' }
 ];
 
 // DOM Elements
@@ -40,10 +40,10 @@ const plantImg = document.getElementById('current-plant');
 
 // Initialize shop
 flowers.forEach(flower => {
-    const btn = document.createElement('button');
-    btn.textContent = `${flower.name} ($${flower.price})`;
-    btn.onclick = () => buyFlower(flower);
-    shopItemsDiv.appendChild(btn);
+  const btn = document.createElement('button');
+  btn.textContent = `${flower.name} ($${flower.price})`;
+  btn.onclick = () => buyFlower(flower);
+  shopItemsDiv.appendChild(btn);
 });
 
 // Buy flower
@@ -78,11 +78,12 @@ function calculateBees() {
 function updateUI() {
   moneySpan.textContent = `Money: $${money}`;
   daySpan.textContent = `Day: ${day}/${maxDays}`;
+
   if (garden.length > 0) {
     plantImg.src = garden[0].image;
     plantImg.alt = garden[0].name;
   } else {
-    plantImg.src = 'sprites/LiterallyJustAPot.png';
+    plantImg.src = '../Game/sprites/LiterallyJustAPot.png';
     plantImg.alt = 'Empty Pot';
   }
 }
@@ -99,7 +100,7 @@ function resetGame() {
 function spawnBees(count) {
   for (let i = 0; i < count; i++) {
     const bee = document.createElement('img');
-    bee.src = 'sprites/Bee.png';
+    bee.src = '../Game/sprites/Bee.png';
     bee.className = 'bee-sprite';
     bee.style.left = Math.random() * (gardenArea.clientWidth - 30) + 'px';
     bee.style.top = Math.random() * (gardenArea.clientHeight - 30) + 'px';
