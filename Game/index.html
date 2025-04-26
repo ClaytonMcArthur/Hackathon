@@ -2,39 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bee Garden Game </title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="garden-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Bee Garden Game </h1>
-    <div id="stats">
-      <span id="money">Money: $100</span>
-      <span id="day">Day: 1/10</span>
+  <section id="bee-garden-game">
+    <div class="garden-header">
+      <h2>Bee Garden Game </h2>
+      <div id="garden-stats">
+        <span id="money">Money: $100</span> |
+        <span id="day">Day: 1/10</span>
+      </div>
     </div>
-  </header>
 
-  <main>
-    <section id="shop">
-      <h2>Shop</h2>
-      <div id="shop-items">
-        <!-- Shop buttons will be created here -->
-      </div>
-    </section>
+    <div class="garden-layout">
+      <section id="shop" class="garden-panel">
+        <h3> Shop</h3>
+        <div id="shop-items"></div>
+      </section>
 
-    <section id="garden">
-      <h2>Garden</h2>
-      <div id="garden-area">
-        <!-- Planted flowers appear here -->
-      </div>
-    </section>
-  </main>
+      <section id="garden" class="garden-panel">
+        <h3> Your Garden</h3>
+        <div id="garden-area"></div>
+      </section>
+    </div>
 
-  <footer>
-    <button id="end-day-button">End Day</button>
-  </footer>
+    <div class="garden-footer">
+      <button id="end-day-button">End Day</button>
+    </div>
+  </section>
 
-  <script src="game.js"></script>
+  <div id="scoreboard" style="display: none;">
+    <h2>Game Over! </h2>
+    <p id="score-money"></p>
+    <p id="score-bees"></p>
+    <p id="score-flowers"></p>
+    <p id="score-stars"></p>
+    <p id="score-best"></p>
+    <button id="restart-button">Restart Game</button>
+  </div>
+
+  <script src="garden-game.js"></script>
 </body>
 </html>
