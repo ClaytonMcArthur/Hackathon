@@ -32,7 +32,7 @@ const restartButton = document.getElementById('restart-button');
 // Create plant display area
 gardenArea.innerHTML = `
   <div id="plant-display">
-    <img id="current-plant" src="sprites/pot.png" alt="Plant Pot" style="width: 200px; height: auto; image-rendering: pixelated;">
+    <img id="current-plant" src="../Game/sprites/LiterallyJustAPot.png" alt="Plant Pot" style="width: 200px; height: auto; image-rendering: pixelated;">
   </div>
 `;
 
