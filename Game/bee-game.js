@@ -1,9 +1,9 @@
 // Game State
 let money = 100;
 let day = 1;
-let numPots = 1;
 const maxDays = 10;
 let garden = [];
+let pots = [];
 
 // Flowers for sale
 const flowers = [
@@ -25,7 +25,7 @@ const seeds = [
   { name: 'SeedsSnapdragon', flower: 'Snapdragon', image: '../Game/sprites/SeedsSnapdragon.png' }
 ]
 
-const pot = { name: 'EmptyPot', price: 5, image: '../Game/sprites/LiterallyJustAPot.png' };
+const pot = { name: 'EmptyPot', price: 50, image: '../Game/sprites/LiterallyJustAPot.png' };
 
 // DOM Elements
 const moneySpan = document.getElementById('money');
@@ -46,7 +46,9 @@ const restartButton = document.getElementById('restart-button');
 // Create plant display area
 gardenArea.innerHTML = `
   <div id="plant-display">
-    <img id="current-plant" src="../Game/sprites/LiterallyJustAPot.png" alt="Plant Pot" style="width: 100px; height: auto; image-rendering: pixelated;">
+    <img name = "pot1" id="current-plant" src="../Game/sprites/LiterallyJustAPot.png" alt="Plant Pot" style="width: 100px; height: auto; image-rendering: pixelated;">
+     <img name = "pot2" id="current-plant" src="../Game/sprites/GreyPot.png" alt="Plant Pot" style="width: 100px; height: auto; image-rendering: pixelated;">
+      <img name = "pot3" id="current-plant" src="../Game/sprites/GreyPot.png" alt="Plant Pot" style="width: 100px; height: auto; image-rendering: pixelated;">
   </div>
 `;
 
@@ -70,7 +72,7 @@ function buyPot(pot) {
     money -= pot.price;
     potImg.src = pot.image;
     updateUI();
-    numPots++;
+    pots = [pot];
   } else {
     alert('Not enough money!');
   }
@@ -158,9 +160,9 @@ function updateUI() {
   moneySpan.textContent = `Money: $${money}`;
   daySpan.textContent = `Day: ${day}/${maxDays}`;
 
-  if (garden.length >= numPots) {
-    plantImg.src = garden[numPots - 1].image;
-    plantImg.alt = garden[numPots - 1].name;
+  if (garden.length >= pots.length) {
+    plantImg.src = garden[pots.length - 1].image;
+    plantImg.alt = garden[pots.length - 1].name;
   } else {
     plantImg.src = pot.image;
     plantImg.alt = pot.name;
@@ -172,6 +174,7 @@ function resetGame() {
   money = 100;
   day = 1;
   garden = [];
+  pots = [];
   updateUI();
 }
 
@@ -244,7 +247,7 @@ function getBestBees() {
 
 // Restart game
 restartButton.onclick = () => {
-  resetGame();
   scoreboard.style.display = 'none';
   document.getElementById('bee-garden-game').style.display = 'block';
+  resetGame();
 };
