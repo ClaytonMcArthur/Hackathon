@@ -95,6 +95,16 @@ function spawnBees(count) {
     bee.style.top = Math.random() * (gardenArea.clientHeight - 30) + 'px';
     gardenArea.appendChild(bee);
 
+    // Animate bee to flutter randomly
+    let flutterDistance = Math.random() * 100 - 50; // random between -50 and +50
+    bee.animate([
+      { transform: `translate(${flutterDistance}px, -120px)`, opacity: 0 }
+    ], {
+      duration: 2000,
+      easing: 'ease-in-out',
+      fill: 'forwards'
+    });
+
     setTimeout(() => {
       bee.remove();
     }, 2000);
