@@ -6,12 +6,12 @@ let garden = [];
 
 // Flowers for sale
 const flowers = [
-  { name: 'Goldenrod', price: 10, bees: 5, image: 'sprites/Goldenrod.png' },
-  { name: 'Borage', price: 20, bees: 10, image: 'sprites/Borage.png' },
-  { name: 'Sunflower', price: 30, bees: 15, image: 'sprites/Sunflower.png' },
-  { name: 'Beebalm', price: 30, bees: 15, image: 'sprites/Beebalm.png' },
-  { name: 'Hyacinth', price: 30, bees: 15, image: 'sprites/Hyacinth.png' },
-  { name: 'Snapdragon', price: 30, bees: 15, image: 'sprites/Snapdragon.png' }
+  { name: 'Goldenrod', price: 10, bees: 5, image: '..Game/sprites/Goldenrod.png' },
+  { name: 'Borage', price: 20, bees: 10, image: '..Game/sprites/Borage.png' },
+  { name: 'Sunflower', price: 30, bees: 15, image: '..Game/sprites/Sunflower.png' },
+  { name: 'Beebalm', price: 30, bees: 15, image: '..Game/sprites/Beebalm.png' },
+  { name: 'Hyacinth', price: 30, bees: 15, image: '..Game/sprites/Hyacinth.png' },
+  { name: 'Snapdragon', price: 30, bees: 15, image: '..Game/sprites/Snapdragon.png' }
 ];
 
 // DOM Elements

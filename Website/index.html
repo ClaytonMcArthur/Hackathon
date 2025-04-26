@@ -84,6 +84,7 @@
 
     <br>
 
+    <!--Three Side By Side Cards-->
     <div class="threeSideBySide">
       <div class="threeSideBySideElement">
         <div class="flipCard">
@@ -145,7 +146,6 @@
         </div>
       </div>
 
-
       <div class="threeSideBySideElement">
         <div class="flipCard">
           <div class="flipCardInner">
@@ -179,80 +179,7 @@
 
     <br>
 
-  <!-- <div class="flipCard">
-      <div class="flipCardInner">
-        <div class="flipCardFront">
-          <img src="assets/bee1.jpg" alt="">
-        </div>
-        
-        <div class="flipCardBack">
-          <h1>Fact 1</h1>
-          <p>This is such a cool fun fact! Super cool fun fact! Super cool!</p>
-        </div>
-      </div>
-    </div>
-
-    <br>
-
-    <div class="flipCard">
-      <div class="flipCardInner">
-        <div class="flipCardFront">
-          <img src="assets/bee2.jpg" alt="">
-        </div>
-        
-        <div class="flipCardBack">
-          <h1>Fact 2</h1>
-          <p>This is such a cool fun fact! Super cool fun fact! Super cool!</p>
-        </div>
-      </div>
-    </div>
-
-    <br>
-
-    <div class="flipCard">
-      <div class="flipCardInner">
-        <div class="flipCardFront">
-          <img src="assets/bee3.jpg" alt="">
-        </div>
-        
-        <div class="flipCardBack">
-          <h1>Fact 3</h1>
-          <p>This is such a cool fun fact! Super cool fun fact! Super cool!</p>
-        </div>
-      </div>
-    </div>
-
-    <br>
-
-    <div class="flipCard">
-      <div class="flipCardInner">
-        <div class="flipCardFront">
-          <img src="assets/bee4.jpg" alt="">
-        </div>
-        
-        <div class="flipCardBack">
-          <h1>Fact 4</h1>
-          <p>This is such a cool fun fact! Super cool fun fact! Super cool!</p>
-        </div>
-      </div>
-    </div>
-
-    <br>
-
-    <div class="flipCard">
-      <div class="flipCardInner">
-        <div class="flipCardFront">
-          <img src="assets/bee5.jpg" alt="">
-        </div>
-        
-        <div class="flipCardBack">
-          <h1>Fact 5</h1>
-          <p>This is such a cool fun fact! Super cool fun fact! Super cool!</p>
-        </div>
-      </div>
-    </div>-->
-
-    <br>
+    <!-- Bee Garden Game Section -->
     <section id="bee-garden-game">
       <div class="garden-header">
         <h2>Bee Garden Game</h2>
@@ -261,28 +188,29 @@
           <span id="day">Day: 1/10</span>
         </div>
       </div>
-    
+
       <div class="garden-layout">
         <section id="shop" class="garden-panel">
           <h3>Shop</h3>
           <div id="shop-items"></div>
         </section>
-    
+
         <section id="garden" class="garden-panel">
           <h3>Your Garden</h3>
           <div id="garden-area">
             <div id="plant-display">
-              <img id="current-plant" src="sprites/LiterallyJustAPot.png" alt="Empty Pot" style="width: 200px; height: auto; image-rendering: pixelated;">
+              <img id="current-plant" src="../Game/sprites/LiterallyJustAPot.png" alt="Empty Pot">
             </div>
           </div>
         </section>
       </div>
-    
+
       <div class="garden-footer">
         <button id="end-day-button">End Day</button>
       </div>
     </section>
-    
+
+    <!-- Scoreboard for Game End -->
     <div id="scoreboard" style="display: none;">
       <h2>Game Over!</h2>
       <p id="score-money"></p>
@@ -298,9 +226,8 @@
   </div>
   
   <script src="script.js"></script>
+  <script src="../Game/bee-game.js"></script>
 
-  <script src="bee-game.js"></script>
-  
 </body>
 
 </html>
