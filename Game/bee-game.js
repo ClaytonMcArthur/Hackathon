@@ -14,6 +14,8 @@ const flowers = [
   { name: 'Snapdragon', price: 30, bees: 15, image: '../Game/sprites/Snapdragon.png' }
 ];
 
+const pot = { name: 'EmptyPot', price: 5, image: '../Game/sprites/LiterallyJustAPot.png' };
+
 // Seed packets
 const seeds = [
   { name: 'SeedsGoldenrod', flower: 'Goldenrod', image: '../Game/sprites/SeedsGoldenrod.png' },
@@ -28,6 +30,7 @@ const seeds = [
 const moneySpan = document.getElementById('money');
 const daySpan = document.getElementById('day');
 const shopItemsDiv = document.getElementById('shop-items');
+const shopPotDiv = document.getElementById('shop-pot');
 const gardenArea = document.getElementById('garden-area');
 const endDayButton = document.getElementById('end-day-button');
 
@@ -60,6 +63,17 @@ function buyFlower(flower) {
   }
 }
 
+// Buy pot
+function buyPot(pot) {
+  if (money >= pot.price) {
+    money -= pot.price;
+    potImg.src = pot.image;
+    updateUI;
+  } else {
+    alert('Not enough money!');
+  }
+}
+
 // Buding seeds
 seeds.forEach(seed => {
   const seedImg = document.createElement('img');
@@ -75,11 +89,29 @@ seeds.forEach(seed => {
     // seed image that is dragged
     const dragIcon = document.createElement('img');
     dragIcon.src = seed.image;
-    dragIcon.style.width = '40px';
-    dragIcon.style.height = '40px';
+    dragIcon.style.width = '50px';
+    dragIcon.style.height = '50px';
     document.body.appendChild(dragIcon);
     e.dataTransfer.setDragImage(dragIcon, 25, 25);
   });
+});
+
+const potImg = document.createElement('img');
+potImg.src = pot.image;
+potImg.alt = pot.name;
+potImg.classList.add('buyable-pot');
+potImg.setAttribute('draggable', true);
+shopPotDiv.appendChild(potImg);
+potImg.addEventListener('dragstart', function (e) {
+  e.dataTransfer.setData('text/plain', pot.name);
+
+  // pot image that is dragged
+  const dragPotIcon = document.createElement('img');
+  dragPotIcon.src = pot.image;
+  dragPotIcon.style.width = '50px';
+  dragPotIcon.style.height = '50px';
+  document.body.appendChild(dragPotIcon);
+  e.dataTransfer.setDragImage(dragPotIcon, 25, 25);
 });
 
 gardenArea.addEventListener('dragover', function (e) {
@@ -93,10 +125,14 @@ gardenArea.addEventListener('drop', function (e) {
   e.preventDefault();
   gardenArea.classList.remove('drag-over');
 
-  const flowerName = e.dataTransfer.getData('text/plain');
-  const flower = flowers.find(f => f.name === flowerName);
-  if (flower) {
-    buyFlower(flower);
+  const itemName = e.dataTransfer.getData('text/plain');
+  if (itemName == 'EmptyPot') {
+    buyPot(pot);
+  } else {
+    const flower = flowers.find(f => f.name === flowerName);
+    if (flower) {
+      buyFlower(flower);
+    }
   }
 });
 
@@ -126,8 +162,8 @@ function updateUI() {
     plantImg.src = garden[0].image;
     plantImg.alt = garden[0].name;
   } else {
-    plantImg.src = '../Game/sprites/LiterallyJustAPot.png';
-    plantImg.alt = 'Empty Pot';
+    plantImg.src = pot.image;
+    plantImg.alt = pot.name;
   }
 }
 
