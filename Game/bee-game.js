@@ -6,9 +6,12 @@ let garden = [];
 
 // Flowers for sale
 const flowers = [
-  { name: 'Dandelion', price: 10, bees: 5, image: 'sprites/dandelion.png' },
-  { name: 'Lavender', price: 20, bees: 10, image: 'sprites/lavender.png' },
-  { name: 'Sunflower', price: 30, bees: 15, image: 'sprites/sunflower.png' }
+  { name: 'Goldenrod', price: 10, bees: 5, image: 'sprites/Goldenrod.png' },
+  { name: 'Borage', price: 20, bees: 10, image: 'sprites/Borage.png' },
+  { name: 'Sunflower', price: 30, bees: 15, image: 'sprites/Sunflower.png' },
+  { name: 'Beebalm', price: 30, bees: 15, image: 'sprites/Beebalm.png' },
+  { name: 'Hyacinth', price: 30, bees: 15, image: 'sprites/Hyacinth.png' },
+  { name: 'Snapdragon', price: 30, bees: 15, image: 'sprites/Snapdragon.png' }
 ];
 
 // DOM Elements
@@ -26,19 +29,28 @@ const scoreStars = document.getElementById('score-stars');
 const scoreBest = document.getElementById('score-best');
 const restartButton = document.getElementById('restart-button');
 
+// Create plant display area
+gardenArea.innerHTML = `
+  <div id="plant-display">
+    <img id="current-plant" src="sprites/pot.png" alt="Plant Pot" style="width: 200px; height: auto; image-rendering: pixelated;">
+  </div>
+`;
+
+const plantImg = document.getElementById('current-plant');
+
 // Initialize shop
 flowers.forEach(flower => {
-  const btn = document.createElement('button');
-  btn.textContent = `${flower.name} ($${flower.price})`;
-  btn.onclick = () => buyFlower(flower);
-  shopItemsDiv.appendChild(btn);
+    const btn = document.createElement('button');
+    btn.textContent = `${flower.name} ($${flower.price})`;
+    btn.onclick = () => buyFlower(flower);
+    shopItemsDiv.appendChild(btn);
 });
 
 // Buy flower
 function buyFlower(flower) {
   if (money >= flower.price) {
     money -= flower.price;
-    garden.push(flower);
+    garden = [flower];
     updateUI();
   } else {
     alert('Not enough money!');
@@ -53,7 +65,6 @@ endDayButton.onclick = () => {
     const beesToday = calculateBees();
     money += beesToday;
     day++;
-    spawnBees(beesToday);
     updateUI();
   }
 };
@@ -67,14 +78,13 @@ function calculateBees() {
 function updateUI() {
   moneySpan.textContent = `Money: $${money}`;
   daySpan.textContent = `Day: ${day}/${maxDays}`;
-  gardenArea.innerHTML = '';
-  garden.forEach(flower => {
-    const flowerImg = document.createElement('img');
-    flowerImg.src = flower.image;
-    flowerImg.alt = flower.name;
-    flowerImg.classList.add('flower-sprite');
-    gardenArea.appendChild(flowerImg);
-  });
+  if (garden.length > 0) {
+    plantImg.src = garden[0].image;
+    plantImg.alt = garden[0].name;
+  } else {
+    plantImg.src = 'sprites/LiterallyJustAPot.png';
+    plantImg.alt = 'Empty Pot';
+  }
 }
 
 // Reset the game
@@ -89,7 +99,7 @@ function resetGame() {
 function spawnBees(count) {
   for (let i = 0; i < count; i++) {
     const bee = document.createElement('img');
-    bee.src = 'sprites/bee.png';
+    bee.src = 'sprites/Bee.png';
     bee.className = 'bee-sprite';
     bee.style.left = Math.random() * (gardenArea.clientWidth - 30) + 'px';
     bee.style.top = Math.random() * (gardenArea.clientHeight - 30) + 'px';

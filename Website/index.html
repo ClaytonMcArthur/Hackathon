@@ -179,7 +179,7 @@
 
     <br>
 
-   <!-- <div class="flipCard">
+  <!-- <div class="flipCard">
       <div class="flipCardInner">
         <div class="flipCardFront">
           <img src="assets/bee1.jpg" alt="">
@@ -253,35 +253,38 @@
     </div>-->
 
     <br>
-    <!-- Bee Garden Game Start -->
     <section id="bee-garden-game">
       <div class="garden-header">
-        <h2>Bee Garden Game </h2>
+        <h2>Bee Garden Game</h2>
         <div id="garden-stats">
           <span id="money">Money: $100</span> |
           <span id="day">Day: 1/10</span>
         </div>
       </div>
-
+    
       <div class="garden-layout">
         <section id="shop" class="garden-panel">
-          <h3> Shop</h3>
+          <h3>Shop</h3>
           <div id="shop-items"></div>
         </section>
-
+    
         <section id="garden" class="garden-panel">
-          <h3> Your Garden</h3>
-          <div id="garden-area"></div>
+          <h3>Your Garden</h3>
+          <div id="garden-area">
+            <div id="plant-display">
+              <img id="current-plant" src="sprites/LiterallyJustAPot.png" alt="Empty Pot" style="width: 200px; height: auto; image-rendering: pixelated;">
+            </div>
+          </div>
         </section>
       </div>
-
+    
       <div class="garden-footer">
         <button id="end-day-button">End Day</button>
       </div>
     </section>
-
+    
     <div id="scoreboard" style="display: none;">
-      <h2>Game Over! </h2>
+      <h2>Game Over!</h2>
       <p id="score-money"></p>
       <p id="score-bees"></p>
       <p id="score-flowers"></p>
@@ -289,7 +292,6 @@
       <p id="score-best"></p>
       <button id="restart-button">Restart Game</button>
     </div>
-    <!--  Bee Garden Game End -->
 
     <br>
 
@@ -297,7 +299,7 @@
   
   <script src="script.js"></script>
 
-  <script src="bee-garden-web/garden-game.js"></script>
+  <script src="bee-game.js"></script>
   
 </body>
 
