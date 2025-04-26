@@ -84,6 +84,10 @@ body {
   border: 2px dashed #a2dca2;
   border-radius: 10px;
   padding: 10px;
+
+  background-image: url('../Game/sprites/Deck.png');
+  background-size: cover;
+  background-position: center;
 }
 
 #garden-area img.flower-sprite {

@@ -57,7 +57,7 @@ html {
 
 /*Style Nav Bar Icon*/
 .navBar .icon {
-  display: none; 
+  display: none;
   background-color: #FFDC74;
   color: #000000;
 }
@@ -73,7 +73,7 @@ html {
 }
 
 .navBar img:hover {
-   background-color: #000000;
+  background-color: #000000;
 }
 
 .navBar img.active {
@@ -81,21 +81,32 @@ html {
 }
 
 /*Style Nav Bar to be Responsive*/
-@media screen and (max-width: 900px /*Was 600px*/) {
-  .navBar a:not(:first-child) {display: none;}
+@media screen and (max-width: 900px
+  /*Was 600px*/
+) {
+  .navBar a:not(:first-child) {
+    display: none;
+  }
+
   .navBar a.icon {
     float: right;
     display: block;
   }
 }
 
-@media screen and (max-width: 900px /*Was 600px*/) {
-  .navBar.responsive {position: sticky;}
+@media screen and (max-width: 900px
+  /*Was 600px*/
+) {
+  .navBar.responsive {
+    position: sticky;
+  }
+
   .navBar.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
+
   .navBar.responsive a {
     float: none;
     display: block;
@@ -133,17 +144,20 @@ html {
   font-family: AzoSans;
 }
 
-.collapsible, button {
+.collapsible,
+button {
   font-style: normal;
   font-family: "DM Sans", sans-serif;
 }
 
-.active, .collapsible button {
+.active,
+.collapsible button {
   border-radius: 10px 10px 0px 0px;
 }
 
 /*Style Collapsible Button On Click and On Hover*/
-.active, .collapsible:hover {
+.active,
+.collapsible:hover {
   background-color: #0D121E;
 }
 
@@ -176,7 +190,8 @@ html {
 }
 
 /*Style Collapsible Paragraph Text*/
-.collapsibleContent, p {
+.collapsibleContent,
+p {
   font-weight: 600;
 }
 
@@ -185,7 +200,7 @@ html {
   width: auto;
 }
 
-/*Style Flip Cards*/ 
+/*Style Flip Cards*/
 .flipCard {
   background-color: transparent;
   width: 300px;
@@ -207,12 +222,13 @@ html {
 }
 
 /*Style Flip Card on Hover*/
-.flipCard:hover .flipCardInner{
+.flipCard:hover .flipCardInner {
   transform: rotateY(180deg);
 }
 
 /*Style Front and Back of Flip Card*/
-.flipCardFront, .flipCardBack {
+.flipCardFront,
+.flipCardBack {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -283,6 +299,7 @@ html {
     margin-left: auto;
   }
 }
+
 /* Bee Garden Game Styles */
 body {
   font-family: 'Quicksand', sans-serif;
@@ -322,26 +339,42 @@ body {
   background: white;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   flex: 1;
   min-width: 300px;
   max-width: 360px;
 }
 
-#shop-items button {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  background-color: #ffd966;
-  cursor: pointer;
-  transition: background-color 0.3s;
+#shop-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+  max-height: 250x;
+  overflow-y: auto;
 }
 
-#shop-items button:hover {
-  background-color: #ffcf33;
+/* Seed shop */
+.seed-packet {
+  width: 40px;
+  height: 40px;
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: contain;
+  margin: 5px;
+  cursor: grab;
+  transition: transform 0.2s;
+}
+
+.seed-packet:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+#garden-area.drag-over {
+  background-color: #eaffea;
+  border-color: #66cc66;
 }
 
 #garden-area {
@@ -353,6 +386,10 @@ body {
   border: 2px dashed #a2dca2;
   border-radius: 10px;
   padding: 10px;
+
+  background-image: url('../Game/sprites/Deck.png');
+  background-size: cover;
+  background-position: center;
 }
 
 #garden-area img.flower-sprite {
@@ -370,9 +407,19 @@ body {
 }
 
 @keyframes flyBee {
-  0% { opacity: 0; transform: translateY(0); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-120px) rotate(360deg); }
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) rotate(360deg);
+  }
 }
 
 .garden-footer {
@@ -400,7 +447,7 @@ body {
   background: white;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.15);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
   text-align: center;
   margin: 30px auto;
   max-width: 600px;

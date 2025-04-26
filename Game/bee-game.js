@@ -71,6 +71,14 @@ seeds.forEach(seed => {
 
   seedImg.addEventListener('dragstart', function (e) {
     e.dataTransfer.setData('text/plain', seed.flower);
+
+    // seed image that is dragged
+    const dragIcon = document.createElement('img');
+    dragIcon.src = seed.image;
+    dragIcon.style.width = '40px';
+    dragIcon.style.height = '40px';
+    document.body.appendChild(dragIcon);
+    e.dataTransfer.setDragImage(dragIcon, 25, 25);
   });
 });
 
