@@ -6,9 +6,9 @@ let garden = [];
 
 // Flowers you can buy
 const flowers = [
-  { name: 'Dandelion', price: 10, bees: 5, icon: '' },
-  { name: 'Lavender', price: 20, bees: 10, icon: '' },
-  { name: 'Sunflower', price: 30, bees: 15, icon: '' }
+  { name: 'Dandelion', price: 10, bees: 5, icon: 'sprites/dandelion.png' },
+  { name: 'Lavender', price: 20, bees: 10, icon: 'sprites/lavender.png' },
+  { name: 'Sunflower', price: 30, bees: 15, icon: 'sprites/sunflower.png' }
 ];
 
 // DOM Elements
@@ -65,9 +65,11 @@ function updateUI() {
   daySpan.textContent = `Day: ${day}/${maxDays}`;
   gardenArea.innerHTML = '';
   garden.forEach(flower => {
-    const flowerSpan = document.createElement('span');
-    flowerSpan.textContent = flower.emoji;
-    gardenArea.appendChild(flowerSpan);
+    const flowerImg = document.createElement('img');
+    flowerImg.src = flower.image;
+    flowerImg.alt = flower.name;
+    flowerImg.classList.add('flower-sprite');
+    gardenArea.appendChild(flowerImg);
   });
 }
 
@@ -79,5 +81,19 @@ function resetGame() {
   updateUI();
 }
 
-// Start game
-updateUI();
+// Spawn bees flying across the garden
+function spawnBees(count) {
+  for (let i = 0; i < count; i++) {
+    const bee = document.createElement('img');
+    bee.src = 'sprites/bee.png';
+    bee.className = 'bee-sprite';
+    bee.style.left = Math.random() * (gardenArea.clientWidth - 30) + 'px';
+    bee.style.top = Math.random() * (gardenArea.clientHeight - 30) + 'px';
+    gardenArea.appendChild(bee);
+
+    // Remove bee after animation
+    setTimeout(() => {
+      bee.remove();
+    }, 2000);
+  }
+}
