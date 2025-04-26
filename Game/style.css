@@ -49,10 +49,29 @@ section {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
+  min-height: 200px;
+  border: 2px dashed #ccc;
+  padding: 10px;
 }
 
-#garden-area span {
-  font-size: 30px;
+#garden-area img.flower-sprite {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+#garden-area img.bee-sprite {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  animation: flyBee 2s linear forwards;
+}
+
+@keyframes flyBee {
+  0% { opacity: 0; transform: translateY(0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-100px); }
 }
 
 footer {
