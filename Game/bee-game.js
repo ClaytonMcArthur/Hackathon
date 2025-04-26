@@ -18,6 +18,7 @@ const flowers = [
 const moneySpan = document.getElementById('money');
 const daySpan = document.getElementById('day');
 const shopItemsDiv = document.getElementById('shop-items');
+const buyButton = document.getElementById('buy-buttonn');
 const gardenArea = document.getElementById('garden-area');
 const endDayButton = document.getElementById('end-day-button');
 
@@ -37,6 +38,20 @@ gardenArea.innerHTML = `
 `;
 
 const plantImg = document.getElementById('current-plant');
+
+// drag and drop functionality
+gardenArea.addEventListener('dragover', (e) => {
+  e.preventDefault();
+});
+gardenArea.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const flower = flowers.find(f => f.name === e.dataTransfer.getData('text/plain'));
+  if (flower) {
+    garden.push(flower);
+    spawnBees(flower.bees);
+    updateUI();
+  }
+});
 
 // Initialize shop
 flowers.forEach(flower => {
