@@ -439,7 +439,7 @@ function showScoreboard() {
   const gameArea = document.getElementById('bee-garden-game');
   gameArea.style.transition = 'opacity 0.5s ease';
   gameArea.style.opacity = '0';
-  
+
   setTimeout(() => {
     gameArea.style.display = 'none';
     scoreboard.style.display = 'block';  // Make scoreboard visible
