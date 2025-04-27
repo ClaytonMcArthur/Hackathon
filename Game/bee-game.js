@@ -2,8 +2,8 @@
 let money = 100;
 let day = 1;
 const maxDays = 10;
-let garden = [];
-let pots = [];
+let garden = []; // array of flowers planted
+let pots = [true, false, false]; // first pot unlocked by default
 
 // Flowers for sale
 const flowers = [
@@ -23,9 +23,9 @@ const seeds = [
   { name: 'SeedsBeebalm', flower: 'Beebalm', image: '../Game/sprites/SeedsBeebalm.png' },
   { name: 'SeedsHyacinth', flower: 'Hyacinth', image: '../Game/sprites/SeedsHyacinth.png' },
   { name: 'SeedsSnapdragon', flower: 'Snapdragon', image: '../Game/sprites/SeedsSnapdragon.png' }
-]
+];
 
-const pot = { name: 'EmptyPot', price: 50, image: '../Game/sprites/LiterallyJustAPot.png' };
+const potItem = { name: 'EmptyPot', price: 50, image: '../Game/sprites/LiterallyJustAPot.png' };
 
 // DOM Elements
 const moneySpan = document.getElementById('money');
@@ -34,7 +34,6 @@ const shopItemsDiv = document.getElementById('shop-items');
 const shopPotDiv = document.getElementById('shop-pot');
 const gardenArea = document.getElementById('garden-area');
 const endDayButton = document.getElementById('end-day-button');
-
 const scoreboard = document.getElementById('scoreboard');
 const scoreMoney = document.getElementById('score-money');
 const scoreBees = document.getElementById('score-bees');
@@ -42,44 +41,12 @@ const scoreFlowers = document.getElementById('score-flowers');
 const scoreStars = document.getElementById('score-stars');
 const scoreBest = document.getElementById('score-best');
 const restartButton = document.getElementById('restart-button');
-const startButton = document.getElementById('start-button');
+const gameStartButton = document.getElementById('game-start-button');
+const gameStartOverlay = document.getElementById('game-start-overlay');
+const plantDisplay = document.getElementById('plant-display');
+const plantImgs = plantDisplay.querySelectorAll('img');
 
-// Create plant display area
-gardenArea.innerHTML = `
-  <div id="plant-display">
-    <img name = "pot1" id="current-plant" src="../Game/sprites/LiterallyJustAPot.png" alt="Plant Pot" style="width: 100px; height: auto; image-rendering: pixelated;">
-     <img name = "pot2" id="current-plant" src="../Game/sprites/GreyPot.png" alt="Plant Pot" style="width: 100px; height: auto; image-rendering: pixelated;">
-      <img name = "pot3" id="current-plant" src="../Game/sprites/GreyPot.png" alt="Plant Pot" style="width: 100px; height: auto; image-rendering: pixelated;">
-  </div>
-`;
-
-const plantImg = document.getElementById('current-plant');
-
-// Buy flower
-function buyFlower(flower) {
-  if (money >= flower.price) {
-    money -= flower.price;
-    garden = [flower];
-    plantImg.src = flower.image;
-    updateUI();
-  } else {
-    alert('Not enough money!');
-  }
-}
-
-// Buy pot
-function buyPot(pot) {
-  if (money >= pot.price) {
-    money -= pot.price;
-    potImg.src = pot.image;
-    updateUI();
-    pots = [pot];
-  } else {
-    alert('Not enough money!');
-  }
-}
-
-// Buding seeds
+// Setup shop seeds
 seeds.forEach(seed => {
   const seedImg = document.createElement('img');
   seedImg.src = seed.image;
@@ -90,35 +57,22 @@ seeds.forEach(seed => {
 
   seedImg.addEventListener('dragstart', function (e) {
     e.dataTransfer.setData('text/plain', seed.flower);
-
-    // seed image that is dragged
-    const dragIcon = document.createElement('img');
-    dragIcon.src = seed.image;
-    dragIcon.style.width = '50px';
-    dragIcon.style.height = '50px';
-    document.body.appendChild(dragIcon);
-    e.dataTransfer.setDragImage(dragIcon, 25, 25);
   });
 });
 
+// Setup buy pot
 const potImg = document.createElement('img');
-potImg.src = pot.image;
-potImg.alt = pot.name;
+potImg.src = potItem.image;
+potImg.alt = potItem.name;
 potImg.classList.add('buyable-pot');
 potImg.setAttribute('draggable', true);
 shopPotDiv.appendChild(potImg);
-potImg.addEventListener('dragstart', function (e) {
-  e.dataTransfer.setData('text/plain', pot.name);
 
-  // pot image that is dragged
-  const dragPotIcon = document.createElement('img');
-  dragPotIcon.src = pot.image;
-  dragPotIcon.style.width = '50px';
-  dragPotIcon.style.height = '50px';
-  document.body.appendChild(dragPotIcon);
-  e.dataTransfer.setDragImage(dragPotIcon, 25, 25);
+potImg.addEventListener('dragstart', function (e) {
+  e.dataTransfer.setData('text/plain', 'BUY_POT');
 });
 
+// Dragging into garden
 gardenArea.addEventListener('dragover', function (e) {
   e.preventDefault();
   gardenArea.classList.add('drag-over');
@@ -130,14 +84,69 @@ gardenArea.addEventListener('drop', function (e) {
   e.preventDefault();
   gardenArea.classList.remove('drag-over');
 
-  const flowerName = e.dataTransfer.getData('text/plain');
-  const flower = flowers.find(f => f.name === flowerName);
-  if (flower) {
-    buyFlower(flower);
+  const droppedData = e.dataTransfer.getData('text/plain');
+
+  if (droppedData === 'BUY_POT') {
+    buyPot();
   } else {
-    buyPot(pot);
+    const flower = flowers.find(f => f.name === droppedData);
+    if (flower) {
+      buyFlower(flower);
+    }
   }
 });
+
+// Buy a flower into available pot
+function buyFlower(flower) {
+  if (money >= flower.price) {
+    const potIndex = garden.length;
+    if (potIndex >= pots.length || !pots[potIndex]) {
+      alert('You need to buy a pot first!');
+      return;
+    }
+    money -= flower.price;
+    garden.push(flower);
+    updateUI();
+  } else {
+    alert('Not enough money!');
+  }
+}
+
+// Buy new pot
+function buyPot() {
+  if (money >= potItem.price) {
+    const nextLockedIndex = pots.findIndex(unlocked => !unlocked);
+    if (nextLockedIndex !== -1) {
+      money -= potItem.price;
+      pots[nextLockedIndex] = true;
+      updateUI();
+    } else {
+      alert('All pots already unlocked!');
+    }
+  } else {
+    alert('Not enough money to buy a pot!');
+  }
+}
+
+// Update UI
+function updateUI() {
+  moneySpan.textContent = `Money: $${money}`;
+  daySpan.textContent = `Day: ${day}/${maxDays}`;
+
+  // Update each pot image
+  plantImgs.forEach((img, index) => {
+    if (garden[index]) {
+      img.src = garden[index].image;
+      img.alt = garden[index].name;
+    } else if (pots[index]) {
+      img.src = '../Game/sprites/LiterallyJustAPot.png';
+      img.alt = 'Empty Pot';
+    } else {
+      img.src = '../Game/sprites/GreyPot.png';
+      img.alt = 'Locked Pot';
+    }
+  });
+}
 
 // End Day logic
 endDayButton.onclick = () => {
@@ -151,23 +160,9 @@ endDayButton.onclick = () => {
   }
 };
 
-// Calculate bees attracted
+// Calculate total bees attracted
 function calculateBees() {
   return garden.reduce((total, flower) => total + flower.bees, 0);
-}
-
-// Update the UI
-function updateUI() {
-  moneySpan.textContent = `Money: $${money}`;
-  daySpan.textContent = `Day: ${day}/${maxDays}`;
-
-  if (garden.length >= pots.length) {
-    plantImg.src = garden[pots.length - 1].image;
-    plantImg.alt = garden[pots.length - 1].name;
-  } else {
-    plantImg.src = pot.image;
-    plantImg.alt = pot.name;
-  }
 }
 
 // Reset the game
@@ -175,37 +170,11 @@ function resetGame() {
   money = 100;
   day = 1;
   garden = [];
-  pots = [];
+  pots = [true, false, false];
   updateUI();
 }
 
-// Spawn bees animation
-function spawnBees(count) {
-  for (let i = 0; i < count; i++) {
-    const bee = document.createElement('img');
-    bee.src = '../Game/sprites/Bee.png';
-    bee.className = 'bee-sprite';
-    bee.style.left = Math.random() * (gardenArea.clientWidth - 30) + 'px';
-    bee.style.top = Math.random() * (gardenArea.clientHeight - 30) + 'px';
-    gardenArea.appendChild(bee);
-
-    // Animate bee to flutter randomly
-    let flutterDistance = Math.random() * 100 - 50; // random between -50 and +50
-    bee.animate([
-      { transform: `translate(${flutterDistance}px, -120px)`, opacity: 0 }
-    ], {
-      duration: 2000,
-      easing: 'ease-in-out',
-      fill: 'forwards'
-    });
-
-    setTimeout(() => {
-      bee.remove();
-    }, 2000);
-  }
-}
-
-// Show final scoreboard
+// Show scoreboard
 function showScoreboard() {
   const totalBees = calculateBees();
   const stars = calculateStars(totalBees);
@@ -227,7 +196,7 @@ function showScoreboard() {
   scoreboard.style.display = 'block';
 }
 
-// Star rating system
+// Calculate star rating
 function calculateStars(bees) {
   if (bees >= 100) return 5;
   if (bees >= 75) return 4;
@@ -237,7 +206,7 @@ function calculateStars(bees) {
   return 0;
 }
 
-// Save and load best score
+// Save/load best bees
 function saveBestBees(bees) {
   localStorage.setItem('bestBees', bees);
 }
@@ -246,14 +215,13 @@ function getBestBees() {
   return parseInt(localStorage.getItem('bestBees') || '0');
 }
 
-// Start game
-startButton.onclick = () => {
-  startButton.style.display = 'none';
-  document.getElementById('bee-garden-game').style.disply = 'block';
+// Start Game Button
+gameStartButton.onclick = () => {
+  gameStartOverlay.style.display = 'none';
   resetGame();
-}
+};
 
-// Restart game
+// Restart Game Button
 restartButton.onclick = () => {
   scoreboard.style.display = 'none';
   document.getElementById('bee-garden-game').style.display = 'block';

@@ -72,7 +72,7 @@ html {
 }
 
 .navBar img:hover {
-   background-color: #0D121E;
+  background-color: #0D121E;
 }
 
 .navBar img.active {
@@ -496,19 +496,45 @@ html {
   font-weight: 600;
 }
 
-#start-button {
-  padding: 12px 25px;
-  font-size: 18px;
-  background: #5cb85c;
-  color: white;
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  margin-top: 20px;
+/* Modal Styling */
+.modal {
+  display: none; /* Hidden initially */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#start-button:hover {
-  background: #4cae4c;
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#modal-start-button {
+  background-color: #ffca28;
+  color: black;
+  font-size: 18px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#modal-start-button:hover {
+  background-color: #ffc107;
 }
 
 #restart-button {
