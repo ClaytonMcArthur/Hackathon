@@ -15,7 +15,7 @@ We developed *Bee a Hero* using HTML, CSS, and JavaScript to create an interacti
 One challenge we faced was integrating a fully functional game into the website without affecting performance or user experience. Another challenge we faced was having to refresh or relearn languages and tools used for this project in a short period of time. 
 
 ## Accomplishments That We're Proud Of
-We are proud of taking each of our individual skills strengths and utilizing them to create an amazing, functional project. We are also proud of our ability to work so well together in a group despite our different abilities.
+We are proud of taking each of our individual skills and strengths, and utilizing them to create an amazing, functional project. We are also proud of our ability to work so well together in a group despite our different abilities.
 
 ## What We Learned
 We learned a lot about endangered bees and what we can do to help them. We also learned to start with a strong idea and build off of it for a fully realized final product. The hardest part about a project is coming up with a realistic idea that solves a real problem.
