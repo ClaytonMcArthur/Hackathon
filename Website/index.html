@@ -207,42 +207,60 @@
         
         <!-- 🐝 Game Start Overlay -->
         <div id="game-start-overlay" style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(255,255,255,0.9);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 20px;
-          z-index: 10;
-          transition: opacity 0.8s ease;
-        ">
-          <div id="game-start-content" style="text-align: center;">
-            <h2 style="font-size: 2rem; color: #0D121E; margin-bottom: 30px;">🐝 Welcome to Bloom and Buzz!</h2>
-            <button id="game-start-button" style="
-              padding: 15px 30px;
-              font-size: 20px;
-              background: #ffca28;
-              color: #0D121E;
-              border: none;
-              border-radius: 15px;
-              cursor: pointer;
-              transition: background-color 0.3s ease, transform 0.2s ease;
-            ">Start</button>
-          </div>
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        z-index: 10;
+        transition: opacity 0.5s ease;
+        opacity: 1;
+      ">
+        <div id="game-start-content" style="background: white; padding: 30px; border-radius: 20px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+          <h2>🐝 Welcome to Bloom and Buzz!</h2>
+          <p>🌱 Drag seeds and pots into your garden to plant flowers.</p>
+          <p>🐝 Harvest flowers after each day to earn bees and money.</p>
+          <p>🎯 Match two same flowers for bonus money.</p>
+          <p>🏆 Play through 10 days to achieve your highest score.</p>
+          <button id="game-start-button" style="margin-top: 20px; padding: 15px 30px; font-size: 20px; background: #ffca28; border: none; border-radius: 15px; cursor: pointer;">Start</button>
         </div>
+      </div>
 
-        <!-- Garden Header -->
-        <div class="garden-header">
-          <h2>🐝Bloom and Buzz</h2>
-          <div id="garden-stats">
-            <span id="money">Money: $100</span> |
-            <span id="day">Day: 1/10</span>
-          </div>
+      <!-- End Day Bonus Overlay -->
+      <div id="end-day-bonus-overlay" style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        z-index: 20;
+      ">
+        <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+          <h2>End of Day Bonus!</h2>
+          <p id="bonus-message" style="margin-bottom: 20px;"></p>
+          <button id="bonus-continue-button" style="padding: 10px 20px; font-size: 18px; background: #7bd67b; border: none; border-radius: 10px; cursor: pointer;">Continue</button>
         </div>
+      </div>
+
+      <!-- Garden Header -->
+      <div class="garden-header">
+        <h2>🐝 Bloom and Buzz</h2>
+        <div id="garden-stats">
+          <span id="money">Money: $100</span> |
+          <span id="day">Day: 1/10</span>
+        </div>
+      </div>
+
 
         <!-- Garden Layout -->
         <div class="garden-layout">
