@@ -1,4 +1,4 @@
-# *Bee a Hero* - UWB Hacks: Save the World 2025
+# *Bee a Hero* - UW*Bee* Hacks: Save the World 2025
 * **Track: Entertainment (High Code)**
 * **Members: Ella Williams, Abby Hoyt, Charlotte Hoyt, Destiny Rebman, Clayton McArthur**
 
