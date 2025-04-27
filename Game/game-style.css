@@ -43,6 +43,7 @@ body {
   max-width: 360px;
 }
 
+/* Shop */
 #shop-items {
   display: flex;
   flex-wrap: wrap;
@@ -53,10 +54,20 @@ body {
   overflow-y: auto;
 }
 
-/* Seed shop */
 .seed-packet {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: contain;
+  margin: 5px;
+  cursor: grab;
+  transition: transform 0.2s;
+}
+
+.buyable-pot {
+  width: 50px;
+  height: 50px;
   max-width: 50px;
   max-height: 50px;
   object-fit: contain;
@@ -66,6 +77,11 @@ body {
 }
 
 .seed-packet:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+.buyable-pot:active {
   cursor: grabbing;
   transform: scale(1.1);
 }
@@ -170,6 +186,21 @@ body {
 #score-best {
   margin-top: 10px;
   font-weight: 600;
+}
+
+#start-button {
+  padding: 12px 25px;
+  font-size: 18px;
+  background: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#start-button:hover {
+  background: #4cae4c;
 }
 
 #restart-button {
