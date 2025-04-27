@@ -10,7 +10,7 @@ body {
   border-radius: 20px;
   max-width: 800px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  position: relative; /* Needed for the overlay to be inside */
+  position: relative; /* Needed for overlay */
 }
 
 /* Game Start Overlay */
@@ -20,29 +20,27 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.95); /* Light white cover */
+  background-color: rgba(255, 255, 255, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
   z-index: 10;
-  animation: fadeIn 0.8s ease forwards; /* Fade in on load */
+  animation: fadeIn 0.8s ease forwards;
 }
 
-/* Content inside the overlay */
+/* Overlay Content */
 #game-start-content {
   text-align: center;
-  margin-top: -30px; /* Push content upward slightly */
+  margin-top: -30px;
 }
 
-/* Heading inside overlay */
 #game-start-content h2 {
   font-size: 2rem;
   color: #0D121E;
   margin-bottom: 30px;
 }
 
-/* Start Button inside overlay */
 #game-start-button {
   padding: 15px 30px;
   font-size: 20px;
@@ -59,7 +57,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Fade In Animation for Overlay */
+/* Fade In Animation */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -109,6 +107,27 @@ body {
   overflow-y: auto;
 }
 
+/* Seed Styling */
+.seed-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+}
+
+.seed-label {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 5px;
+  color: #0D121E;
+  font-weight: 600;
+}
+
+.seed-wrapper:hover .seed-packet {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
+
 .seed-packet {
   width: 50px;
   height: 50px;
@@ -120,6 +139,7 @@ body {
   transition: transform 0.2s;
 }
 
+/* Shop Pot Styling */
 .buyable-pot {
   width: 50px;
   height: 50px;
@@ -131,18 +151,37 @@ body {
   transition: transform 0.2s;
 }
 
+/* Dragging Effect */
 .seed-packet:active,
 .buyable-pot:active {
   cursor: grabbing;
   transform: scale(1.1);
 }
 
-/* Garden Area */
-#garden-area.drag-over {
-  background-color: #eaffea;
-  border-color: #66cc66;
+/* Unaffordable Seeds */
+.unaffordable {
+  opacity: 0.4;
+  filter: grayscale(100%);
+  pointer-events: none;
 }
 
+/* Glow when just affordable */
+.just-affordable {
+  animation: glow 1s ease;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px 5px #9cff9c; }
+  100% { box-shadow: none; }
+}
+
+/* Bounce Animation when Planted */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Garden Area */
 #garden-area {
   position: relative;
   display: flex;
@@ -157,21 +196,29 @@ body {
   background-position: center;
 }
 
+#garden-area.drag-over {
+  background-color: #eaffea;
+  border-color: #66cc66;
+}
+
+/* Planted Flowers */
 #garden-area img.flower-sprite {
   width: 50px;
   height: 50px;
   object-fit: contain;
+  animation: bounce 0.6s ease;
 }
 
+/* Bee Animation */
 #garden-area img.bee-sprite {
-  position: absolute;
   width: 30px;
   height: 30px;
+  position: absolute;
   pointer-events: none;
   animation: flyBee 2s ease-in forwards;
 }
 
-/* Bee Animation */
+/* Bee Flying Animation */
 @keyframes flyBee {
   0% {
     opacity: 0;
